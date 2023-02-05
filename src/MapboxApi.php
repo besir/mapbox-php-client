@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Besir\MapboxPhpClient;
 
 use Besir\MapboxPhpClient\Api\Navigation\MapMatching;
+use Besir\MapboxPhpClient\Api\Navigation\MapMatchingProfile;
 use Psr\Http\Client\ClientInterface;
 
 class MapboxApi
@@ -15,8 +16,18 @@ class MapboxApi
 		private readonly ClientInterface $httpClient,
 	) {}
 
-	public function getMapMatching(string $version = 'v5'): MapMatching
+	public function getMapMatching(
+		array $coordinates,
+		MapMatchingProfile $matchingProfile,
+		string $version = 'v5'
+	): MapMatching
 	{
-		return new MapMatching($this->accessToken, $this->httpClient, $version);
+		return new MapMatching(
+			$this->accessToken,
+			$this->httpClient,
+			$matchingProfile,
+			$coordinates,
+			$version
+		);
 	}
 }
