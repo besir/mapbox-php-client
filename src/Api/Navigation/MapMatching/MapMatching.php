@@ -2,10 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Besir\MapboxPhpClient\Api\Navigation;
+namespace Besir\MapboxPhpClient\Api\Navigation\MapMatching;
 
 use GuzzleHttp\Psr7\Request;
 use Psr\Http\Client\ClientInterface;
+use Besir\MapboxPhpClient\Api\Navigation\MapMatching\Parameters\Geometries;
+use Besir\MapboxPhpClient\Api\Navigation\MapMatching\Parameters\Overview;
+use Besir\MapboxPhpClient\Api\Navigation\MapMatching\Parameters\Profile;
+use Besir\MapboxPhpClient\Api\Navigation\MapMatching\Parameters\Annotation;
 
 class MapMatching
 {
@@ -13,15 +17,15 @@ class MapMatching
 
 	private array $annotations = [];
 	private array $approaches;
-	private MapMatchingGeometries $geometries = MapMatchingGeometries::polyline;
+	private Geometries $geometries = Geometries::polyline;
 	private string $language;
-	private MapMatchingOverview $overview = MapMatchingOverview::simplified;
+	private Overview $overview = Overview::simplified;
 	private bool $steps = false;
 
 	public function __construct(
 		private string $accessToken,
 		private ClientInterface $httpClient,
-		private MapMatchingProfile $profile,
+		private Profile $profile,
 		private array $coordinates,
 		private string $version = 'v5',
 	) {
@@ -83,7 +87,7 @@ class MapMatching
 
 	/* ********************************** Optional parameter setters ********************************** */
 
-	public function addAnnotation(MapMatchingAnnotation $annotation): self
+	public function addAnnotation(Annotation $annotation): self
 	{
 		if (!in_array($annotation->value, $this->annotations)) {
 			$this->annotations[] = $annotation->value;
@@ -92,14 +96,14 @@ class MapMatching
 		return $this;
 	}
 
-	public function setGeometries(MapMatchingGeometries $geometries): self
+	public function setGeometries(Geometries $geometries): self
 	{
 		$this->geometries = $geometries;
 
 		return $this;
 	}
 
-	public function setOverview(MapMatchingOverview $overview): self
+	public function setOverview(Overview $overview): self
 	{
 		$this->overview = $overview;
 

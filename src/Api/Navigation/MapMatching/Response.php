@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Besir\MapboxPhpClient\Api\Navigation;
+namespace Besir\MapboxPhpClient\Api\Navigation\MapMatching;
 
-use Besir\MapboxPhpClient\Api\Response\Response;
+use Besir\MapboxPhpClient\Api\Response\Response as MapboxResponse;
 
-class MapMatchingResponse extends Response
+class Response extends MapboxResponse
 {
 	private array $tracepoints;
 	private array $matchings;

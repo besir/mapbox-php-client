@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Besir\MapboxPhpClient;
 
-use Besir\MapboxPhpClient\Api\Navigation\MapMatching;
-use Besir\MapboxPhpClient\Api\Navigation\MapMatchingProfile;
+use Besir\MapboxPhpClient\Api\Navigation\MapMatching\MapMatching;
+use Besir\MapboxPhpClient\Api\Navigation\MapMatching\Parameters\Profile;
 use Psr\Http\Client\ClientInterface;
 
 class MapboxApi
@@ -18,7 +18,7 @@ class MapboxApi
 
 	public function getMapMatching(
 		array $coordinates,
-		MapMatchingProfile $matchingProfile,
+		Profile $matchingProfile,
 		string $version = 'v5'
 	): MapMatching
 	{

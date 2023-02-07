@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Besir\MapboxPhpClient\Api\Navigation;
+namespace Besir\MapboxPhpClient\Api\Navigation\MapMatching\Parameters;
 
-enum MapMatchingProfile: string
+enum Profile: string
 {
 	case driving = 'driving';
 	case drivingTraffic = 'driving-traffic';

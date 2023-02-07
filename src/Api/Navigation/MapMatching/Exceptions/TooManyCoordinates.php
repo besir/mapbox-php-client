@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Besir\MapboxPhpClient\Api\Navigation\Exceptions;
+namespace Besir\MapboxPhpClient\Api\Navigation\MapMatching\Exceptions;
 
 class TooManyCoordinates extends \Exception
 {

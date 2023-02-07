@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Besir\MapboxPhpClient\Api\Navigation;
+namespace Besir\MapboxPhpClient\Api\Navigation\MapMatching\Parameters;
 
-enum MapMatchingOverview: string
+enum Overview: string
 {
 	case full = 'full';
 	case simplified = 'simplified';

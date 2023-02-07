@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Besir\MapboxPhpClient\Api\Navigation;
+namespace Besir\MapboxPhpClient\Api\Navigation\MapMatching\Parameters;
 
-enum MapMatchingGeometries: string
+enum Geometries: string
 {
 	case geojson = 'geojson';
 	case polyline = 'polyline';
