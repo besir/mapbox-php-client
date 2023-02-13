@@ -10,6 +10,7 @@ use Besir\MapboxPhpClient\Api\Navigation\MapMatching\Parameters\Geometries;
 use Besir\MapboxPhpClient\Api\Navigation\MapMatching\Parameters\Overview;
 use Besir\MapboxPhpClient\Api\Navigation\MapMatching\Parameters\Profile;
 use Besir\MapboxPhpClient\Api\Navigation\MapMatching\Parameters\Annotation;
+use Tracy\Debugger;
 
 class MapMatching
 {
@@ -35,7 +36,7 @@ class MapMatching
 	}
 
 	// Function to send request to Mapbox API
-	public function send()
+	public function send(): Response
 	{
 		$requestString = sprintf('%s/%s/%s/%s?access_token=%s%s',
 			self::API_ROUTE,
@@ -46,6 +47,8 @@ class MapMatching
 			$this->computeRequestArgs(),
 		);
 
+		Debugger::log('https://api.mapbox.com/'.$requestString);
+
 		// Create a new request
 		$request = new Request(
 			'GET',
@@ -53,10 +56,10 @@ class MapMatching
 		);
 
 		// Send the request
-		$response = $this->httpClient->sendRequest($request);
+		return Response::factory($this->httpClient->sendRequest($request));
 
 		// Return the response
-		return json_decode((string) $response->getBody()->getContents(), true);
+//		return json_decode((string) $response->getBody()->getContents(), true);
 	}
 
 	// Function to get the coordinates

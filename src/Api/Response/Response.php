@@ -6,7 +6,8 @@ namespace Besir\MapboxPhpClient\Api\Response;
 
 abstract class Response
 {
-	protected srtring $code;
+	public function __construct(protected string $code)
+	{}
 
 	public function getCode(): string
 	{

@@ -4,26 +4,41 @@ declare(strict_types=1);
 
 namespace Besir\MapboxPhpClient\Api\Navigation\MapMatching;
 
+use Besir\MapboxPhpClient\Api\Navigation\MapMatching\Collection\Matchings;
+use Besir\MapboxPhpClient\Api\Navigation\MapMatching\Collection\Tracepoints;
 use Besir\MapboxPhpClient\Api\Response\Response as MapboxResponse;
+use Psr\Http\Message\ResponseInterface;
 
 class Response extends MapboxResponse
 {
-	private array $tracepoints;
-	private array $matchings;
-	private array $waypoints;
 
-	public function getTracepoints(): array
+	public function __construct(
+		public readonly Matchings $matchings,
+		public readonly Tracepoints $tracepoints,
+	) {}
+
+	public static function factory(ResponseInterface $response)
+	{
+		$responseBody = json_decode((string) $response->getBody()->getContents(), true);
+
+		$matchings = Matchings::factory($responseBody['matchings']);
+
+		$self = new self(
+			$matchings,
+			Tracepoints::factory($responseBody['tracepoints'], $matchings),
+		);
+
+		return $self;
+	}
+
+	public function getTracepoints(): Tracepoints
 	{
 		return $this->tracepoints;
 	}
 
-	public function getMatchings(): array
+	public function getMatchings(): Matchings
 	{
 		return $this->matchings;
 	}
 
-	public function getWaypoints(): array
-	{
-		return $this->waypoints;
-	}
 }
