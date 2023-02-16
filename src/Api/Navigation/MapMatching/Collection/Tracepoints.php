@@ -59,14 +59,9 @@ class Tracepoints extends \ArrayIterator
 	private function computeLegForTracepoint(TracepointObject $tracepoint, Matchings $matchings): TracepointObject
 	{
 		$matchingsByIndex = array_filter($matchings->getArrayCopy(), function (MatchObject $matching) use ($tracepoint) {
-			echo $matching->matchingIndex . ' ?? ' . $tracepoint->matchingsIndex . PHP_EOL;
 			return $matching->matchingIndex === $tracepoint->matchingsIndex;
 		});
 
-
-//		print_r($matchingsByIndex[0]->legs[0]); die();
-
-		echo "matching: " . count($matchingsByIndex[$tracepoint->matchingsIndex]->legs) . ' - ' . $tracepoint->waypointIndex . PHP_EOL;
 		if (count($matchingsByIndex[$tracepoint->matchingsIndex]->legs) === $tracepoint->waypointIndex) {
 			$matching = $matchingsByIndex[$tracepoint->matchingsIndex]
 				->legs->offsetGet($tracepoint->waypointIndex-1);
@@ -74,7 +69,6 @@ class Tracepoints extends \ArrayIterator
 
 			return $tracepoint->setLegBindingPosition(BindingPosition::start);
 		} else {
-//			print_r($matchingsByIndex[$tracepoint->matchingsIndex]->legs);
 			$matching = $matchingsByIndex[$tracepoint->matchingsIndex]
 				->legs->offsetGet($tracepoint->waypointIndex);
 			$tracepoint->setLeg($matching);

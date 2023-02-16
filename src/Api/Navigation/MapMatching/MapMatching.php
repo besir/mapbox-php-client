@@ -47,8 +47,6 @@ class MapMatching
 			$this->computeRequestArgs(),
 		);
 
-		Debugger::log('https://api.mapbox.com/'.$requestString);
-
 		// Create a new request
 		$request = new Request(
 			'GET',
@@ -57,9 +55,6 @@ class MapMatching
 
 		// Send the request
 		return Response::factory($this->httpClient->sendRequest($request));
-
-		// Return the response
-//		return json_decode((string) $response->getBody()->getContents(), true);
 	}
 
 	// Function to get the coordinates
